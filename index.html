@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A simple demo address form.">
+    <title>Address form demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #172033;
+        background: #f3f6fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 2rem 1rem;
+      }
+
+      main {
+        width: min(100%, 36rem);
+        margin: 0 auto;
+        padding: clamp(1.25rem, 5vw, 2.5rem);
+        border: 1px solid #dce3ed;
+        border-radius: 1rem;
+        background: #fff;
+        box-shadow: 0 1rem 2.5rem #17203312;
+      }
+
+      h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+
+      .intro,
+      .privacy-note {
+        color: #4b5870;
+        line-height: 1.5;
+      }
+
+      .privacy-note {
+        padding: 0.75rem 1rem;
+        border-left: 3px solid #6d5ce8;
+        background: #f5f3ff;
+      }
+
+      form {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      label {
+        display: grid;
+        gap: 0.4rem;
+        font-weight: 600;
+      }
+
+      input {
+        width: 100%;
+        min-height: 2.75rem;
+        padding: 0.65rem 0.75rem;
+        border: 1px solid #aab5c5;
+        border-radius: 0.5rem;
+        font: inherit;
+      }
+
+      input:focus-visible,
+      button:focus-visible {
+        outline: 3px solid #887cff;
+        outline-offset: 2px;
+      }
+
+      button {
+        min-height: 2.9rem;
+        padding: 0.7rem 1rem;
+        border: 0;
+        border-radius: 0.5rem;
+        background: #5141c8;
+        color: #fff;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #4032a9;
+      }
+
+      #form-status {
+        min-height: 1.5rem;
+        margin: 0;
+        color: #245b37;
+      }
+
+      @media (max-width: 28rem) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Address form</h1>
+      <p class="intro">Enter a name and mailing address to try the form.</p>
+      <p class="privacy-note">
+        Demo only: this page does not send or save your information. Submitting clears the fields.
+      </p>
+
+      <form id="address-form">
+        <label for="full-name">
+          Full name
+          <input id="full-name" name="name" autocomplete="name" required>
+        </label>
+
+        <label for="street-address">
+          Street address
+          <input id="street-address" name="street" autocomplete="address-line1" required>
+        </label>
+
+        <label for="address-line-2">
+          Apartment, suite, etc. <span>(optional)</span>
+          <input id="address-line-2" name="address-line-2" autocomplete="address-line2">
+        </label>
+
+        <div class="row">
+          <label for="city">
+            City
+            <input id="city" name="city" autocomplete="address-level2" required>
+          </label>
+          <label for="region">
+            State / province
+            <input id="region" name="region" autocomplete="address-level1" required>
+          </label>
+        </div>
+
+        <div class="row">
+          <label for="postal-code">
+            ZIP / postal code
+            <input id="postal-code" name="postal-code" autocomplete="postal-code" required>
+          </label>
+          <label for="country">
+            Country
+            <input id="country" name="country" autocomplete="country-name" required>
+          </label>
+        </div>
+
+        <button type="submit">Submit demo</button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <script>
+      const form = document.querySelector("#address-form");
+      const status = document.querySelector("#form-status");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        status.textContent = "Demo complete. Your information was not sent or saved.";
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
